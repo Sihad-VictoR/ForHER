@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Since I Fell for You 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #fff);
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      text-align: center;
+      color: #ff4d88;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5rem;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+
+    .heart, .flower, .kite, .boba, .ims {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: red;
+      clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 50% 75%, 18% 100%, 0% 35%);
+      animation: float 8s linear infinite;
+    }
+
+    .flower {
+      width: 25px;
+      height: 25px;
+      background: url('flower.png') no-repeat center;
+      background-size: contain;
+      animation: float 12s linear infinite;
+    }
+
+    .kite {
+      width: 30px;
+      height: 30px;
+      background: url('kite.png') no-repeat center;
+      background-size: contain;
+      animation: float 14s linear infinite;
+    }
+
+    .boba {
+      width: 50px;
+      height: 50px;
+      background: url('boba.png') no-repeat center;
+      background-size: contain;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .ims {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-size: cover;
+      animation: floatims 10s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatims {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    audio {
+      display: none;
+    }
+
+    .message {
+      margin-top: 40px;
+      font-size: 1.3rem;
+      padding: 0 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>I've Loved You Since 💗</h1>
+  <div id="countdown"></div>
+  <div class="message">Since that beautiful morning on October 11th, 2023, my heart chose you. Forever.</div>
+  <div class="boba"></div>
+
+  <!-- Floating Images -->
+  <div class="ims" style="top: 20%; left: 10%; background-image: url('a1.png');"></div>
+  <div class="ims" style="top: 40%; left: 80%; background-image: url('a2.png');"></div>
+  <div class="ims" style="top: 60%; left: 20%; background-image: url('a3.png');"></div>
+  <div class="ims" style="top: 75%; left: 70%; background-image: url('a4.png');"></div>
+
+  <!-- Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/06/29/audio_3522b91e91.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const startDate = new Date('2023-10-11T10:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('countdown').textContent =
+        `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Spawn random hearts, flowers, and kites
+    const elements = ['heart', 'flower', 'kite'];
+    setInterval(() => {
+      const el = document.createElement('div');
+      const type = elements[Math.floor(Math.random() * elements.length)];
+      el.className = type;
+      el.style.left = `${Math.random() * 100}%`;
+      el.style.animationDuration = `${6 + Math.random() * 8}s`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 15000);
+    }, 500);
+  </script>
+</body>
+</html>
